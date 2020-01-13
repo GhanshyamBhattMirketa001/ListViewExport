@@ -1,0 +1,69 @@
+<!--  
+* Created By      : Mirketa Inc.
+* Created Date    : 11/05/2019
+* Created Purpose : This is the main component of ListView Exporter in which we are Presenting the interface of ListView Exporter.
+					Selection.
+					To know more about listView, Browse link ::
+*					https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_listview.htm
+--> 
+
+
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="ListViewDataClass">
+    <aura:attribute name="listOfRecord" type="sObject[]" />
+    <aura:attribute name="listOfDotRecord" type="Map" />
+    <aura:attribute name="selected" type="String" default=''/>
+    <aura:attribute name="selectedListView" type="String" default=''/>
+    <aura:attribute name="filteredData" type="ListView[]" />
+    <aura:attribute name="fieldsVal" type="String[]" />
+    <aura:attribute name="objects" type="List[]" />
+    <lightning:spinner aura:id="mySpinner2" class="slds-show"/>
+    <lightning:spinner aura:id="mySpinner" class="slds-hide"/>
+    <aura:handler name="init" value="{!this}" action="{!c.getObjectList}"/>
+    
+    <lightning:card footer="" title="Download ListView Records">
+        
+        <lightning:icon iconName="action:download" size="xx-small" class="download"/>
+        <div class="constant_table" >
+            <table class="slds-table slds-table--bordered slds-table--striped">
+                <thead>
+                    <tr>
+                        <th scope="col"><span class="slds-truncate">Object list</span></th>
+                        <th scope="col"><span class="slds-truncate">ListView</span></th>
+                        <th scope="col"><span class="slds-truncate">Select format</span></th>
+                        <th scope="col"><span class="slds-truncate">Action</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <lightning:select name="objectList" aura:id="myselect" label="" onchange="{!c.getListView}" value="{!v.selected}" required="true" >
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.objects}" var="object" >
+                                    <option value="{!object}" selected="{!object.selected}">{!object}</option>
+                                </aura:iteration>
+                            </lightning:select>
+                        </td>
+                        <td>
+                            <lightning:select aura:id="Selected" name="Listview" label=""   value="{!v.selectedListView}" required="true" >
+                                <option value="">--None--</option>
+                                <aura:iteration items="{!v.filteredData}" var="object">
+                                    <option value="{!object}" selected="{!object.selectedListView}">{!object}</option>
+                                </aura:iteration>
+                            </lightning:select>
+                        </td>
+                        <td>
+                            <lightning:select aura:id="select" name="select" label="" onchange="{! c.onChange }">
+                                <option value="CSV">CSV</option>
+                            </lightning:select>
+                        </td>
+                        <td>
+                            <aura:if isTrue="{!((v.selected)!=Null)}">
+                                <lightning:button variant="brand" label="Download" title="Brand action" onclick="{!c.downloadCSV }" />
+                            </aura:if>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </lightning:card>
+</aura:component>

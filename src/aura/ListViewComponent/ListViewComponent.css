@@ -1,0 +1,32 @@
+.THIS.slds-spinner_container {  
+  z-index: 10000;
+  position: fixed;   
+}
+.THIS .slds-form-element__label {
+    display: none;
+}
+.THIS .slds-table thead th:last-child {
+    width: 142px;
+}
+.THIS .slds-text-heading_small{
+    padding-left: 32px;
+    font-weight: 700;
+    font-size: 22px;
+}
+.THIS .download{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.THIS .constant_table{
+    padding: 0 15px;
+}
+.THIS .constant_table .slds-table thead th:first-child{
+    width: 35%;
+}
+.THIS .constant_table .slds-table thead th:nth-child(2){
+    width: 35%;
+}
+.THIS .constant_table .slds-table thead th:nth-child(3){
+    width: 10%;
+}
